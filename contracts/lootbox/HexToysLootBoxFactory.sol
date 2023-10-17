@@ -3,12 +3,12 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "./HexToysLootBox.sol";
 
 
 
-contract HexToysLootBoxFactory is OwnableUpgradeable {
+contract HexToysLootBoxFactory is Ownable {
     using SafeMath for uint256;
     
     /** Create HexToysLootBox fee (PLS) */
@@ -23,11 +23,10 @@ contract HexToysLootBoxFactory is OwnableUpgradeable {
     event HexToysMysteryBoxCreated(address box_address, address owner, string name, string uri, address paymentToken, uint256 price);
     event FeeUpdated(uint256 old_fee, uint256 new_fee);
 
-	function initialize() public initializer {
-        __Ownable_init();
-        creatingFee = 100000 ether;
+	constructor () {		
+		creatingFee = 100000 ether;
 		serviceFee = 21; // 21 for 2.1%
-    }	
+	}
 
     function createHexToysMysteryBox(string memory _name, 
 		string memory _uri,

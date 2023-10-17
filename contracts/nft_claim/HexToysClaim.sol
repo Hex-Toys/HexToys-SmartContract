@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC1155/utils/ERC1155HolderUpgradeable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 
 /**
  * @title Claim based smart contract
@@ -12,7 +12,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC1155/utils/ERC1155HolderUpg
  * @author HexToys Inc.
  */
 
-contract HexToysClaim is OwnableUpgradeable, ERC1155HolderUpgradeable {
+contract HexToysClaim is Ownable, ERC1155Holder {
     /// @dev Struct for claim
     /// @param claimId The claim Id
     /// @param colAddr which collection
@@ -42,11 +42,10 @@ contract HexToysClaim is OwnableUpgradeable, ERC1155HolderUpgradeable {
     error InvalidSignature();
     error InvalidSignatureLength();
 
-    function initialize(address _colAddr, address _signerAddress) public initializer {
-        __Ownable_init();
-        colAddr = _colAddr;
+    constructor (address _colAddr, address _signerAddress) {		
+		colAddr = _colAddr;
         signerAddress = _signerAddress;
-    }
+	}
 
     function setCollectionAddress(address _colAddr) external onlyOwner {
         require(_colAddr != address(0x0), "invalid address");
@@ -61,13 +60,13 @@ contract HexToysClaim is OwnableUpgradeable, ERC1155HolderUpgradeable {
 
     function emergencyTransfer(address _toAddr, uint256 _tokenId, uint256 _amount) external onlyOwner {
         // PRC1155 transfer
-        IERC1155Upgradeable nft = IERC1155Upgradeable(colAddr);
+        IERC1155 nft = IERC1155(colAddr);
         nft.safeTransferFrom(address(this), _toAddr, _tokenId, _amount, "");
     }
 
     function emergencyBatchTransfer(address _toAddr, uint256[] memory _tokenIds, uint256[] memory _amounts) external onlyOwner {
         // PRC1155 transfer
-        IERC1155Upgradeable nft = IERC1155Upgradeable(colAddr);
+        IERC1155 nft = IERC1155(colAddr);
         nft.safeBatchTransferFrom(address(this), _toAddr, _tokenIds, _amounts, "");
     }
 
@@ -102,7 +101,7 @@ contract HexToysClaim is OwnableUpgradeable, ERC1155HolderUpgradeable {
             revert InvalidSignature();
 
         // PRC1155 transfer
-        IERC1155Upgradeable nft = IERC1155Upgradeable(_colAddr);
+        IERC1155 nft = IERC1155(_colAddr);
         nft.safeTransferFrom(_from, address(this), _tokenId, _amount, "");
 
         isClaimed[_claimId] = true;

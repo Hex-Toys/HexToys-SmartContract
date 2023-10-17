@@ -5,12 +5,7 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay * 10
 
 async function main() {
   const ethers = hre.ethers;
-  const upgrades = hre.upgrades;
-
   console.log('network:', await ethers.provider.getNetwork());
-
-  const signer = (await ethers.getSigners())[0];
-  console.log('signer:', await signer.getAddress());
 
   const feeAddress = process.env.FEE_ADDRESS;
 
@@ -18,20 +13,18 @@ async function main() {
    *  Deploy and Verify HexToysSingleNFTStakingFactory
    */
   {   
-    const HexToysSingleNFTStakingFactory = await ethers.getContractFactory('HexToysSingleNFTStakingFactory', {
-      signer: (await ethers.getSigners())[0]
-    });
-    const singleNFTStakingFactory = await upgrades.deployProxy(HexToysSingleNFTStakingFactory, [feeAddress], { initializer: 'initialize' });
+    const HexToysSingleNFTStakingFactory = await ethers.getContractFactory('HexToysSingleNFTStakingFactory');
+    const singleNFTStakingFactory = await HexToysSingleNFTStakingFactory.deploy(feeAddress);
     await singleNFTStakingFactory.deployed()
 
-    console.log('HexToysSingleNFTStakingFactory proxy deployed: ', singleNFTStakingFactory.address)
+    console.log('HexToysSingleNFTStakingFactory deployed: ', singleNFTStakingFactory.address)
     
     await sleep(60);
     // Verify HexToysSingleNFTStakingFactory
     try {
       await hre.run('verify:verify', {
         address: singleNFTStakingFactory.address,
-        constructorArguments: []
+        constructorArguments: [feeAddress]
       })
       console.log('HexToysSingleNFTStakingFactory verified')
     } catch (error) {
@@ -46,17 +39,17 @@ async function main() {
     const HexToysMultiNFTStakingFactory = await ethers.getContractFactory('HexToysMultiNFTStakingFactory', {
       signer: (await ethers.getSigners())[0]
     });
-    const multiNFTStakingFactory = await upgrades.deployProxy(HexToysMultiNFTStakingFactory, [feeAddress], { initializer: 'initialize' });
+    const multiNFTStakingFactory = await HexToysMultiNFTStakingFactory.deploy(feeAddress);
     await multiNFTStakingFactory.deployed()
 
-    console.log('HexToysMultiNFTStakingFactory proxy deployed: ', multiNFTStakingFactory.address)
+    console.log('HexToysMultiNFTStakingFactory deployed: ', multiNFTStakingFactory.address)
     
     await sleep(60);
     // Verify HexToysMultiNFTStakingFactory
     try {
       await hre.run('verify:verify', {
         address: multiNFTStakingFactory.address,
-        constructorArguments: []
+        constructorArguments: [feeAddress]
       })
       console.log('HexToysMultiNFTStakingFactory verified')
     } catch (error) {

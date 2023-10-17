@@ -3,7 +3,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
@@ -13,7 +13,7 @@ interface INFTStaking {
     function initialize(InitializeParam memory param) external;
 }
 
-contract HexToysSingleNFTStakingFactory is OwnableUpgradeable {
+contract HexToysSingleNFTStakingFactory is Ownable {
     using SafeMath for uint256;
     using EnumerableSet for EnumerableSet.UintSet;
 
@@ -51,17 +51,16 @@ contract HexToysSingleNFTStakingFactory is OwnableUpgradeable {
     event SingleNFTStakingCreated(
         address _stake_address,
         InitializeParam _param
-    );    
+    );
 
-    function initialize(address _adminFeeAddress) public initializer {
-        __Ownable_init();
-        adminFeeAddress = _adminFeeAddress;        
+    constructor (address _adminFeeAddress) {		
+		adminFeeAddress = _adminFeeAddress;        
 
         adminFeePercent = 21;
         depositFeePerNft = 100 ether;
         withdrawFeePerNft = 100 ether;
-        currentSubscriptionsId = 0;
-    }
+        currentSubscriptionsId = 0;		
+	}
 
     function getAdminFeeAddress() external view returns (address) {
         return adminFeeAddress;

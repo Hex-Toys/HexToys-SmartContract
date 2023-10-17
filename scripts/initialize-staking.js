@@ -40,7 +40,7 @@ async function main() {
   */
   {
     console.log('Initialize HexToysSingleNFTStakingFactory...')
-    const singleFactoryAddress = '0xa292a8adaac47f04ea4af3fdb63119a1987d90e1';
+    const singleFactoryAddress = '0xfE638108760262AA5885f34Bc2d4A1D9cb182341';
     const HexToysSingleNFTStakingFactory = await ethers.getContractFactory('HexToysSingleNFTStakingFactory', {
       signer: (await ethers.getSigners())[0]
     });
@@ -67,7 +67,7 @@ async function main() {
   */
   {
     console.log('Initialize HexToysMultiNFTStakingFactory...')
-    const multiFactoryAddress = '0x06438db8be430fb74821dbcfb34db1f4b35ac843';
+    const multiFactoryAddress = '0x1E6e4a02716e820cE17E75153817Bba6bfc36e8D';
     const HexToysMultiNFTStakingFactory = await ethers.getContractFactory('HexToysMultiNFTStakingFactory', {
       signer: (await ethers.getSigners())[0]
     });

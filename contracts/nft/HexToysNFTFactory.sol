@@ -3,7 +3,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "./HexToysMultipleNFT.sol";
 import "./HexToysSingleNFT.sol";
@@ -12,7 +12,7 @@ interface INFTCollection {
 	function initialize(string memory _name, string memory _uri, address creator, bool bPublic) external;	
 }
 
-contract HexToysNFTFactory is OwnableUpgradeable {
+contract HexToysNFTFactory is Ownable {
     using SafeMath for uint256;
 
     address[] public collections;
@@ -21,9 +21,9 @@ contract HexToysNFTFactory is OwnableUpgradeable {
     event MultiCollectionCreated(address collection_address, address owner, string name, string uri, bool isPublic);
     event SingleCollectionCreated(address collection_address, address owner, string name, string uri, bool isPublic);
     
-	function initialize() public initializer {
-        __Ownable_init();
-    }	
+	constructor () {
+		
+	}
 
 	function createMultipleCollection(string memory _name, string memory _uri, bool bPublic) public returns(address collection) {
 		if(bPublic){

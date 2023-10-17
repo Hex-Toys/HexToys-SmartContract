@@ -5,23 +5,17 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay * 10
 
 async function main() {
   const ethers = hre.ethers;
-  const upgrades = hre.upgrades;
   console.log('network:', await ethers.provider.getNetwork());
-
-  const signer = (await ethers.getSigners())[0];
-  console.log('signer:', await signer.getAddress());
   
   /**
    *  Deploy and Verify HexToysAddNFTCollection
    */
   {   
-    const HexToysAddNFTCollection = await ethers.getContractFactory('HexToysAddNFTCollection', {
-      signer: (await ethers.getSigners())[0]
-    });
-    const addNFTCollection = await upgrades.deployProxy(HexToysAddNFTCollection, [], { initializer: 'initialize' });
+    const contractFactory = await ethers.getContractFactory('HexToysAddNFTCollection');
+    const addNFTCollection = await contractFactory.deploy();
     await addNFTCollection.deployed()
 
-    console.log('HexToysAddNFTCollection proxy deployed: ', addNFTCollection.address)
+    console.log('HexToysAddNFTCollection deployed: ', addNFTCollection.address)
     
     await sleep(60);
     // Verify HexToysAddNFTCollection

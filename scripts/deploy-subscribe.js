@@ -5,23 +5,17 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay * 10
 
 async function main() {
   const ethers = hre.ethers;
-  const upgrades = hre.upgrades;
   console.log('network:', await ethers.provider.getNetwork());
-
-  const signer = (await ethers.getSigners())[0];
-  console.log('signer:', await signer.getAddress());
 
   /**
    *  Deploy and Verify HexToysSubscription
    */
   {   
-    const HexToysSubscription = await ethers.getContractFactory('HexToysSubscription', {
-      signer: (await ethers.getSigners())[0]
-    });
-    const subscription = await upgrades.deployProxy(HexToysSubscription, [], { initializer: 'initialize' });
+    const HexToysSubscription = await ethers.getContractFactory('HexToysSubscription');
+    const subscription = await HexToysSubscription.deploy();
     await subscription.deployed()
 
-    console.log('HexToysSubscription proxy deployed: ', subscription.address)
+    console.log('HexToysSubscription deployed: ', subscription.address)
     
     await sleep(60);
     // Verify HexToysSubscription

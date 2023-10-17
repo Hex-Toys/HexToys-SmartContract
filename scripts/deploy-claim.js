@@ -5,11 +5,7 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay * 10
 
 async function main() {
   const ethers = hre.ethers;
-  const upgrades = hre.upgrades;
   console.log('network:', await ethers.provider.getNetwork());
-
-  const signer = (await ethers.getSigners())[0];
-  console.log('signer:', await signer.getAddress());
   
   const signerAddress = process.env.SIGNER_ADDRESS;
   const colAddress = process.env.COLLECTION_ADDRESS;
@@ -18,20 +14,18 @@ async function main() {
    *  Deploy and Verify HexToysClaim
    */
   {   
-    const HexToysClaim = await ethers.getContractFactory('HexToysClaim', {
-      signer: (await ethers.getSigners())[0]
-    });
-    const claim = await upgrades.deployProxy(HexToysClaim, [colAddress, signerAddress], { initializer: 'initialize' });
+    const HexToysClaim = await ethers.getContractFactory('HexToysClaim');
+    const claim = await HexToysClaim.deploy(colAddress, signerAddress);
     await claim.deployed()
 
-    console.log('HexToysClaim proxy deployed: ', claim.address)
+    console.log('HexToysClaim deployed: ', claim.address)
     
     await sleep(60);
     // Verify HexToysClaim
     try {
       await hre.run('verify:verify', {
         address: claim.address,
-        constructorArguments: []
+        constructorArguments: [colAddress, signerAddress]
       })
       console.log('HexToysClaim verified')
     } catch (error) {

@@ -3,14 +3,14 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface INFTCollection {
 	function owner() external view returns (address);
 	function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
 
-contract HexToysAddNFTCollection is OwnableUpgradeable {
+contract HexToysAddNFTCollection is Ownable {
     using SafeMath for uint256;
 
     address[] public collections;
@@ -21,11 +21,10 @@ contract HexToysAddNFTCollection is OwnableUpgradeable {
 	// nftType : 0:ERC721, 1: ERC1155
     event CollectionAdded(address collection_address, address owner, uint256 nftType, string name, string uri);
     
-    function initialize() public initializer {
-        __Ownable_init();
-        fee = 100000 ether;
-        publicAdd = false;
-    }		
+    constructor () {		
+		fee = 100 ether;
+        publicAdd = false;		
+	}
 
 	function setFee(uint256 _fee) external onlyOwner {		
 		fee = _fee;

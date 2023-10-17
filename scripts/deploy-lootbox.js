@@ -5,23 +5,17 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay * 10
 
 async function main() {
   const ethers = hre.ethers;
-  const upgrades = hre.upgrades;
   console.log('network:', await ethers.provider.getNetwork());
-
-  const signer = (await ethers.getSigners())[0];
-  console.log('signer:', await signer.getAddress());
   
   /**
    *  Deploy and Verify HexToysLootBoxFactory
    */
   {   
-    const HexToysLootBoxFactory = await ethers.getContractFactory('HexToysLootBoxFactory', {
-      signer: (await ethers.getSigners())[0]
-    });
-    const lootBoxFactory = await upgrades.deployProxy(HexToysLootBoxFactory, [], { initializer: 'initialize' });
+    const HexToysLootBoxFactory = await ethers.getContractFactory('HexToysLootBoxFactory');
+    const lootBoxFactory = await HexToysLootBoxFactory.deploy();
     await lootBoxFactory.deployed()
 
-    console.log('HexToysLootBoxFactory proxy deployed: ', lootBoxFactory.address)
+    console.log('HexToysLootBoxFactory deployed: ', lootBoxFactory.address)
     
     await sleep(60);
     // Verify HexToysLootBoxFactory
