@@ -18,17 +18,17 @@ async function main() {
 
     console.log('HexToysNFTFactory deployed: ', nftFactory.address)
     
-    await sleep(60);
-    // Verify HexToysNFTFactory
-    try {
-      await hre.run('verify:verify', {
-        address: nftFactory.address,
-        constructorArguments: []
-      })
-      console.log('HexToysNFTFactory verified')
-    } catch (error) {
-      console.log('HexToysNFTFactory verification failed : ', error)
-    }    
+    // await sleep(60);
+    // // Verify HexToysNFTFactory
+    // try {
+    //   await hre.run('verify:verify', {
+    //     address: nftFactory.address,
+    //     constructorArguments: []
+    //   })
+    //   console.log('HexToysNFTFactory verified')
+    // } catch (error) {
+    //   console.log('HexToysNFTFactory verification failed : ', error)
+    // }    
   }
 }
 

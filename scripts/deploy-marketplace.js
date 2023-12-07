@@ -20,17 +20,17 @@ async function main() {
 
     console.log('HexToysMarketV2 deployed: ', marketV2.address)
     
-    await sleep(60);
+   // await sleep(60);
     // Verify HexToysMarketV2
-    try {
-      await hre.run('verify:verify', {
-        address: marketV2.address,
-        constructorArguments: [feeAddress, signerAddress]
-      })
-      console.log('HexToysMarketV2 verified')
-    } catch (error) {
-      console.log('HexToysMarketV2 verification failed : ', error)
-    }    
+    // try {
+    //   await hre.run('verify:verify', {
+    //     address: marketV2.address,
+    //     constructorArguments: [feeAddress, signerAddress]
+    //   })
+    //   console.log('HexToysMarketV2 verified')
+    // } catch (error) {
+    //   console.log('HexToysMarketV2 verification failed : ', error)
+    // }    
   }
 }
 

@@ -20,17 +20,17 @@ async function main() {
 
     console.log('HexToysClaim deployed: ', claim.address)
     
-    await sleep(60);
+  //  await sleep(60);
     // Verify HexToysClaim
-    try {
-      await hre.run('verify:verify', {
-        address: claim.address,
-        constructorArguments: [colAddress, signerAddress]
-      })
-      console.log('HexToysClaim verified')
-    } catch (error) {
-      console.log('HexToysClaim verification failed : ', error)
-    }    
+    // try {
+    //   await hre.run('verify:verify', {
+    //     address: claim.address,
+    //     constructorArguments: [colAddress, signerAddress]
+    //   })
+    //   console.log('HexToysClaim verified')
+    // } catch (error) {
+    //   console.log('HexToysClaim verification failed : ', error)
+    // }    
   }
 }
 

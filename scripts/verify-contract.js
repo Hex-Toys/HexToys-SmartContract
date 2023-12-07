@@ -14,15 +14,15 @@ async function main() {
   const contractAddress = '0xC16D32eCF660290C9351a9c878D0D482235be233';
 
   // Verify Contract
-  try {
-    await hre.run('verify:verify', {
-      address: contractAddress,
-      constructorArguments: []
-    })
-    console.log('verified')
-  } catch (error) {
-    console.log('verification failed : ', error)
-  }
+  // try {
+  //   await hre.run('verify:verify', {
+  //     address: contractAddress,
+  //     constructorArguments: []
+  //   })
+  //   console.log('verified')
+  // } catch (error) {
+  //   console.log('verification failed : ', error)
+  // }
 }
 
 main()

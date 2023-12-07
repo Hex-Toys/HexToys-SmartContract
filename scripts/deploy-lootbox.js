@@ -17,17 +17,17 @@ async function main() {
 
     console.log('HexToysLootBoxFactory deployed: ', lootBoxFactory.address)
     
-    await sleep(60);
+   // await sleep(60);
     // Verify HexToysLootBoxFactory
-    try {
-      await hre.run('verify:verify', {
-        address: lootBoxFactory.address,
-        constructorArguments: []
-      })
-      console.log('HexToysLootBoxFactory verified')
-    } catch (error) {
-      console.log('HexToysLootBoxFactory verification failed : ', error)
-    }    
+    // try {
+    //   await hre.run('verify:verify', {
+    //     address: lootBoxFactory.address,
+    //     constructorArguments: []
+    //   })
+    //   console.log('HexToysLootBoxFactory verified')
+    // } catch (error) {
+    //   console.log('HexToysLootBoxFactory verification failed : ', error)
+    // }    
   }
 
 }

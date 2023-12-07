@@ -17,17 +17,17 @@ async function main() {
 
     console.log('HexToysSubscription deployed: ', subscription.address)
     
-    await sleep(60);
-    // Verify HexToysSubscription
-    try {
-      await hre.run('verify:verify', {
-        address: subscription.address,
-        constructorArguments: []
-      })
-      console.log('HexToysSubscription verified')
-    } catch (error) {
-      console.log('HexToysSubscription verification failed : ', error)
-    }    
+    // await sleep(60);
+    // // Verify HexToysSubscription
+    // try {
+    //   await hre.run('verify:verify', {
+    //     address: subscription.address,
+    //     constructorArguments: []
+    //   })
+    //   console.log('HexToysSubscription verified')
+    // } catch (error) {
+    //   console.log('HexToysSubscription verification failed : ', error)
+    // }    
   }
 }
 

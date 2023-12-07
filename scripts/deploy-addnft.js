@@ -17,17 +17,17 @@ async function main() {
 
     console.log('HexToysAddNFTCollection deployed: ', addNFTCollection.address)
     
-    await sleep(60);
-    // Verify HexToysAddNFTCollection
-    try {
-      await hre.run('verify:verify', {
-        address: addNFTCollection.address,
-        constructorArguments: []
-      })
-      console.log('HexToysAddNFTCollection verified')
-    } catch (error) {
-      console.log('HexToysAddNFTCollection verification failed : ', error)
-    }    
+    // await sleep(60);
+    // // Verify HexToysAddNFTCollection
+    // try {
+    //   await hre.run('verify:verify', {
+    //     address: addNFTCollection.address,
+    //     constructorArguments: []
+    //   })
+    //   console.log('HexToysAddNFTCollection verified')
+    // } catch (error) {
+    //   console.log('HexToysAddNFTCollection verification failed : ', error)
+    // }    
   }
 }
 
