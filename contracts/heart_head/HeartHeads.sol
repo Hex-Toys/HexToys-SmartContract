@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -17,7 +17,7 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
     event TokenMinted(uint256 tokenId, string tokenURI);
     event MetadataUrlUpdated(uint256 tokenId, string newMetadataUrl);
 
-    constructor() ERC721("HeartHeads", "Heart") Ownable(msg.sender) {}
+    constructor() ERC721("HeartHeads", "Heart") {}
 
     function removeTokenURI(string memory uri) internal {
         for (uint256 i = 0; i < tokenURIs.length; i++) {
@@ -52,7 +52,13 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
         require(tokenURIs.length > 0, "No token URIs available");
 
         uint256 randomIndex = uint256(
-            keccak256(abi.encodePacked(block.timestamp, block.difficulty))
+            keccak256(
+                abi.encodePacked(
+                    block.timestamp,
+                    block.difficulty,
+                    _nextTokenId
+                )
+            )
         ) % tokenURIs.length;
         return tokenURIs[randomIndex];
     }
@@ -104,8 +110,16 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
 
     function supportsInterface(
         bytes4 interfaceId
-    ) public view override(ERC721, ERC721URIStorage) returns (bool) {
-        return super.supportsInterface(interfaceId);
+    ) public view virtual override(ERC721, ERC721URIStorage) returns (bool) {
+        return
+            ERC721.supportsInterface(interfaceId) ||
+            ERC721URIStorage.supportsInterface(interfaceId);
+    }
+
+    function _burn(
+        uint256 tokenId
+    ) internal virtual override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
     }
 
     function withdrawContractBalance() external onlyOwner {
