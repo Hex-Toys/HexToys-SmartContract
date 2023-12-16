@@ -8,48 +8,38 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
     uint256 private _nextTokenId;
     mapping(uint256 => address) private _tokenOwner;
-    mapping(string => uint256) public tokenLimits;
+
+    mapping(uint256 => string) public randomURI;
+    uint256 public uriIndex;
+
     uint256 public nftprice = 0.01 ether;
     uint256 public totalrandommint;
-    string[] private tokenURIs;
 
-    event TokenURIsAdded(string[] tokenURIs, uint256[] limits);
+    event TokenURIsAdded(string[] tokenURIs);
     event TokenMinted(uint256 tokenId, string tokenURI);
     event MetadataUrlUpdated(uint256 tokenId, string newMetadataUrl);
 
     constructor() ERC721("HeartHeads", "Heart") {}
 
-    function removeTokenURI(string memory uri) internal {
-        for (uint256 i = 0; i < tokenURIs.length; i++) {
-            if (
-                keccak256(abi.encodePacked(tokenURIs[i])) ==
-                keccak256(abi.encodePacked(uri))
-            ) {
-                delete tokenLimits[uri];
-                tokenURIs[i] = tokenURIs[tokenURIs.length - 1];
-                tokenURIs.pop();
-                break;
-            }
-        }
+    function removeTokenURI(uint256 _randomindex) internal {
+        randomURI[_randomindex] = randomURI[uriIndex - 1];
+        delete randomURI[uriIndex - 1];
+        uriIndex--;
     }
 
     function addRandomTokenURIs(
-        string[] memory newTokenURIs,
-        uint256[] memory limits
+        string[] memory newTokenURIs
     ) external onlyOwner {
-        require(
-            newTokenURIs.length == limits.length,
-            "Length mismatch between tokenURIs and limits"
-        );
-        emit TokenURIsAdded(newTokenURIs, limits);
-        for (uint256 i = 0; i < newTokenURIs.length; i++) {
-            tokenURIs.push(newTokenURIs[i]);
-            tokenLimits[newTokenURIs[i]] = limits[i];
+        require(newTokenURIs.length > 0, "Empty array");
+        emit TokenURIsAdded(newTokenURIs);
+        for (uint256 i = uriIndex; i < uriIndex + newTokenURIs.length; i++) {
+            randomURI[i] = newTokenURIs[i - uriIndex];
         }
+        uriIndex = uriIndex + newTokenURIs.length;
     }
 
-    function getRandomTokenURI() internal view returns (string memory) {
-        require(tokenURIs.length > 0, "No token URIs available");
+    function getRandomTokenURI() internal view returns (uint256) {
+        require(uriIndex > 0, "No token URIs available");
 
         uint256 randomIndex = uint256(
             keccak256(
@@ -59,8 +49,8 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
                     _nextTokenId
                 )
             )
-        ) % tokenURIs.length;
-        return tokenURIs[randomIndex];
+        ) % uriIndex;
+        return randomIndex;
     }
 
     function setNftPrice(uint256 newPrice) public onlyOwner {
@@ -69,18 +59,13 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
 
     function safeMintWithRandomTokenURI() external payable returns (uint256) {
         require(msg.value >= nftprice, "require 0.01 PLS token to Mint NFT");
-        string memory randomTokenURI = getRandomTokenURI();
-        uint256 limit = tokenLimits[randomTokenURI];
-
-        require(limit > 0, "Token limit reached");
-
-        uint256 tokenId = safeMint(randomTokenURI);
+        uint256 _randomindex = getRandomTokenURI();
+        uint256 tokenId = safeMint(randomURI[_randomindex]);
         totalrandommint++;
-        tokenLimits[randomTokenURI]--;
-        if (tokenLimits[randomTokenURI] == 0) {
-            removeTokenURI(randomTokenURI);
-        }
-        emit TokenMinted(tokenId, randomTokenURI);
+
+        emit TokenMinted(tokenId, randomURI[_randomindex]);
+        removeTokenURI(_randomindex);
+
         return tokenId;
     }
 
