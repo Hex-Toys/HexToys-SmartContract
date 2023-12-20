@@ -57,16 +57,17 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
         nftprice = newPrice;
     }
 
-    function safeMintWithRandomTokenURI() external payable returns (uint256) {
-        require(msg.value >= nftprice, "require 0.01 PLS token to Mint NFT");
-        uint256 _randomindex = getRandomTokenURI();
-        uint256 tokenId = safeMint(randomURI[_randomindex]);
-        totalrandommint++;
+    function safeMintWithRandomTokenURI(uint256 _amount) external payable {
+        require(msg.value >= nftprice * _amount, "Not enough fees");
+        require(_amount <= uriIndex, "Provided amount not available");
+        for (uint256 i = 0; i < _amount; i++) {
+            uint256 _randomindex = getRandomTokenURI();
+            uint256 tokenId = safeMint(randomURI[_randomindex]);
+            totalrandommint++;
 
-        emit TokenMinted(tokenId, randomURI[_randomindex]);
-        removeTokenURI(_randomindex);
-
-        return tokenId;
+            emit TokenMinted(tokenId, randomURI[_randomindex]);
+            removeTokenURI(_randomindex);
+        }
     }
 
     function safeMint(string memory uri) public returns (uint256) {
