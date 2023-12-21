@@ -6,17 +6,17 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay * 10
 async function main() {
   const ethers = hre.ethers;
   console.log('network:', await ethers.provider.getNetwork());
-  
+
   /**
    *  Deploy and Verify HexToysAddNFTCollection
    */
-  {   
+  {
     const contractFactory = await ethers.getContractFactory('HexToysAddNFTCollection');
     const addNFTCollection = await contractFactory.deploy();
     await addNFTCollection.deployed()
 
     console.log('HexToysAddNFTCollection deployed: ', addNFTCollection.address)
-    
+
     // await sleep(60);
     // // Verify HexToysAddNFTCollection
     // try {

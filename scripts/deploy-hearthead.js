@@ -5,15 +5,18 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat");
+require('dotenv').config();
 
 async function main() {
 
-
-  const contract = await hre.ethers.deployContract("HeartHeads");
-  await contract.deployed()
+  const feeAddress = process.env.FEE_ADDRESS;
+  console.log("feeeeee", feeAddress);
+  const HeardHeads = await ethers.getContractFactory('HeartHeads');
+  const hearthead = await HeardHeads.deploy(feeAddress);
+  await hearthead.deployed()
 
   console.log(
-    `HeardHeads contract deployed to ${contract.address}`,
+    `HeardHeads contract deployed to ${hearthead.address}`,
   );
 }
 

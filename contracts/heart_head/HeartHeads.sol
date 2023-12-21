@@ -12,6 +12,7 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
     mapping(uint256 => string) public randomURI;
     uint256 public uriIndex;
 
+    address public feeaddress;
     uint256 public nftprice = 0.01 ether;
     uint256 public totalrandommint;
 
@@ -19,7 +20,9 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
     event TokenMinted(uint256 tokenId, string tokenURI);
     event MetadataUrlUpdated(uint256 tokenId, string newMetadataUrl);
 
-    constructor() ERC721("HeartHeads", "Heart") {}
+    constructor(address _feeaddress) ERC721("HeartHeads", "Heart") {
+        feeaddress = _feeaddress;
+    }
 
     function removeTokenURI(uint256 _randomindex) internal {
         randomURI[_randomindex] = randomURI[uriIndex - 1];
@@ -60,6 +63,7 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
     function safeMintWithRandomTokenURI(uint256 _amount) external payable {
         require(msg.value >= nftprice * _amount, "Not enough fees");
         require(_amount <= uriIndex, "Provided amount not available");
+        payable(feeaddress).transfer(msg.value);
         for (uint256 i = 0; i < _amount; i++) {
             uint256 _randomindex = getRandomTokenURI();
             uint256 tokenId = safeMint(randomURI[_randomindex]);
@@ -108,10 +112,7 @@ contract HeartHeads is ERC721, ERC721URIStorage, Ownable {
         super._burn(tokenId);
     }
 
-    function withdrawContractBalance() external onlyOwner {
-        uint256 contractBalance = address(this).balance;
-        require(contractBalance > 0, "Contract balance is zero");
-
-        payable(owner()).transfer(contractBalance);
+    function setFeeAddress(address _feeaddress) external onlyOwner {
+        feeaddress = _feeaddress;
     }
 }
