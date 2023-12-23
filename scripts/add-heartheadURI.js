@@ -21,18 +21,18 @@ let ipfsdata = [
     "ipfs://QmT6jSkG84PbBcRRPEu19bXTArUw4wiKjYaurj96n71vYP/18.json",
     "ipfs://QmT6jSkG84PbBcRRPEu19bXTArUw4wiKjYaurj96n71vYP/19.json",
     "ipfs://QmT6jSkG84PbBcRRPEu19bXTArUw4wiKjYaurj96n71vYP/20.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/1.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/2.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/3.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/4.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/5.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/6.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/7.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/8.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/9.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/10.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/11.json",
-    "ipfs://QmW89zPXyi3CbVknTFvNTBX3WKohJ7KwxsoduDGKMyQXTf/12.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/1.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/2.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/3.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/4.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/5.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/6.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/7.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/8.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/9.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/10.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/11.json",
+    "ipfs://QmVPwFBx52a5uzMWwZjr7Gk3RAEfGAevznXQhgJMgoYNeV/12.json",
     "ipfs://QmaiexVCDcizC751APY693fG1ddJyH9YQLsFavLWbBQdps/1.json",
     "ipfs://QmaiexVCDcizC751APY693fG1ddJyH9YQLsFavLWbBQdps/2.json",
     "ipfs://QmaiexVCDcizC751APY693fG1ddJyH9YQLsFavLWbBQdps/3.json",
@@ -108,8 +108,8 @@ let ipfsdata = [
     "ipfs://QmaopHeUJ4MsFztiwRnLX7bVQGq8hr9mzn4cQFkwDGHCac/48.json",
     "ipfs://QmaopHeUJ4MsFztiwRnLX7bVQGq8hr9mzn4cQFkwDGHCac/49.json",
     "ipfs://QmaopHeUJ4MsFztiwRnLX7bVQGq8hr9mzn4cQFkwDGHCac/50.json",
-    "ipfs://QmdAEbF8rgH9fAoq4UYWGNupBUogu4JTAgbLCCyyuVsXeE/1.json",
-    "ipfs://QmdAEbF8rgH9fAoq4UYWGNupBUogu4JTAgbLCCyyuVsXeE/2.json",
+    "ipfs://QmaPCPYnVLvGaSrepJQEaeeJeCobJitReRNxCLwXe4aG1M/1.json",
+    "ipfs://QmaPCPYnVLvGaSrepJQEaeeJeCobJitReRNxCLwXe4aG1M/2.json",
     "ipfs://QmPoaAUDe6M1e6BQXQBgRACQYDtBuKvJ8f8jGtNtHrjwW9/1.json",
     "ipfs://QmPoaAUDe6M1e6BQXQBgRACQYDtBuKvJ8f8jGtNtHrjwW9/2.json",
     "ipfs://QmPoaAUDe6M1e6BQXQBgRACQYDtBuKvJ8f8jGtNtHrjwW9/3.json",
@@ -148,7 +148,7 @@ function repeatElements(arr, counts) {
 }
 
 async function main() {
-    const heartheadaddress = "0x9a5D686Ed0897ECcFb53F8c643054d952B1eDE12";
+    const heartheadaddress = "0xD55dB7Cb58543518E6762567CB7CE0CE37469ddc";
     const heartheadcontract = await ethers.getContractAt("HeartHeads", heartheadaddress);
 
     const repeatedArray = repeatElements(ipfsdata, supply);
