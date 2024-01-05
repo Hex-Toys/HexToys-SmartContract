@@ -18,32 +18,19 @@ async function main() {
         `Airdrop contract deployed to ${airdrophearthead.address}`,
     );
     console.log("Starting Airdrop.....");
-    let users = [];
-    let supply = [];
-    for (var i in data_heart) {
-        users.push(data_heart[i].minter);
-        supply.push(1);
-    }
-    for (let i = 0; i < users.length; i += 50) {
-        const chunk_user = users.slice(i, i + 50);
-        const chunk_supply = supply.slice(i, i + 50);
-        let tx = await airdrophearthead.airdrop(chunk_user, chunk_supply, uri_santa);
+
+    for (let i = 0; i < data_heart.length; i += 25) {
+        const chunk_user = data_heart.slice(i, i + 25);
+        let tx = await airdrophearthead.airdrop(chunk_user, uri_santa);
         tx.wait(2);
-        //console.log(`added ${i} santa hat`);
+        console.log(`added ${i} santa hat`);
     }
 
-    users = [];
-    supply = [];
-    for (var i in data_hex) {
-        users.push(data_hex[i].holderAddress);
-        supply.push(1);
-    }
-    for (let i = 0; i < users.length; i += 50) {
-        const chunk_user = users.slice(i, i + 50);
-        const chunk_supply = supply.slice(i, i + 50);
-        let tx = await airdrophearthead.airdrop(chunk_user, chunk_supply, uri_hexforce);
+    for (let i = 0; i < data_hex.length; i += 25) {
+        const chunk_user = data_hex.slice(i, i + 25);
+        let tx = await airdrophearthead.airdrop(chunk_user, uri_hexforce);
         tx.wait(2);
-        //console.log(`added ${i} hexforce hat`);
+        console.log(`added ${i} hexforce hat`);
     }
     console.log("AirDrop completed......");
 

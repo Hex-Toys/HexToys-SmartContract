@@ -12,12 +12,8 @@ contract AirdropHeartHead is Ownable, IERC721Receiver {
         hearhead = _hearhead;
     }
 
-    function airdrop(
-        address[] calldata _user,
-        uint256[] calldata _supply,
-        string calldata _uri
-    ) external {
-        require(_user.length == _supply.length, "Invalid input");
+    function airdrop(address[] calldata _user, string calldata _uri) external {
+        require(_user.length > 0, "Invalid input");
         for (uint i = 0; i < _user.length; i++) {
             uint256 tokenId = HeartHeads(hearhead).safeMint(_uri);
             HeartHeads(hearhead).safeTransferFrom(
