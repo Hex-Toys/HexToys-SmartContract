@@ -29,7 +29,7 @@ async function main() {
         const chunk_supply = supply.slice(i, i + 50);
         let tx = await airdrophearthead.airdrop(chunk_user, chunk_supply, uri_santa);
         tx.wait(2);
-        console.log(`added ${i} santa hat`);
+        //console.log(`added ${i} santa hat`);
     }
 
     users = [];
@@ -43,7 +43,7 @@ async function main() {
         const chunk_supply = supply.slice(i, i + 50);
         let tx = await airdrophearthead.airdrop(chunk_user, chunk_supply, uri_hexforce);
         tx.wait(2);
-        console.log(`added ${i} hexforce hat`);
+        //console.log(`added ${i} hexforce hat`);
     }
     console.log("AirDrop completed......");
 
