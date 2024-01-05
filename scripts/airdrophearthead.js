@@ -6,7 +6,7 @@ let uri_santa = "ipfs://QmRyb8NQazT5cezX1En8SgY4PDi44bogAWwfv4oNk2iWgq";
 let uri_hexforce = "ipfs://QmUMeMmCQKfLnAZs6c5jQpCT2MUsD9XeUUeKvRccuwyVpd";
 
 async function main() {
-    const heartheadaddress = "0x06d184e3715D0025350cFFc9117a5428036353DF";
+    const heartheadaddress = "0x66F8A148dA90d3b028aBE9e83e446a35a4DA7D75";
     //const heartheadcontract = await ethers.getContractAt("HeartHeads", heartheadaddress);
 
     console.log("transaction intiated...")
