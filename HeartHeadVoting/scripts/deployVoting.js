@@ -8,7 +8,7 @@ async function main() {
     const HeartHeadWrapped = await hre.ethers.getContractFactory(
         "HeartHeadWrapped"
     );
-    const heartheadwrapped = await HeartHeadWrapped.deploy("0xD55dB7Cb58543518E6762567CB7CE0CE37469ddc");
+    const heartheadwrapped = await HeartHeadWrapped.deploy("0x66F8A148dA90d3b028aBE9e83e446a35a4DA7D75");
     await heartheadwrapped.waitForDeployment();
 
     console.log("HeartHeadWrapped address:", await heartheadwrapped.getAddress());

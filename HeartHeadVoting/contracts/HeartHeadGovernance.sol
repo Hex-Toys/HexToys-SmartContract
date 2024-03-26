@@ -23,7 +23,7 @@ contract HeartHeadGovernance is
         address initialOwner
     )
         Governor("HeartHeadGovernance")
-        GovernorSettings(1, 3600, 25)
+        GovernorSettings(1, 181440, 369)
         GovernorVotes(_token)
         GovernorVotesQuorumFraction(0)
         Ownable(initialOwner)
