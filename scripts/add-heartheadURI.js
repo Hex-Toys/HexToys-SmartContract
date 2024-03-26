@@ -148,7 +148,7 @@ function repeatElements(arr, counts) {
 }
 
 async function main() {
-    const heartheadaddress = "0xD55dB7Cb58543518E6762567CB7CE0CE37469ddc";
+    const heartheadaddress = "0x0aE9e12E9082b7C7C937D1c4f9554d5b2a445a0c";
     const heartheadcontract = await ethers.getContractAt("HeartHeads", heartheadaddress);
 
     const repeatedArray = repeatElements(ipfsdata, supply);
